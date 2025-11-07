@@ -13,13 +13,18 @@ class QrCode extends Model
     protected $fillable = [
         'kelas_id',
         'guru_id',
+        'jadwal_id',
         'token',
-        'expires_at'
+        'expires_at',
+        'waktu_pertemuan',
+        'is_active',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
-        'expires_at' => 'datetime'
+        'expires_at' => 'datetime',
+        'waktu_pertemuan' => 'datetime',
+        'is_active' => 'boolean',
     ];
 
     public function kelas(): BelongsTo
@@ -30,5 +35,10 @@ class QrCode extends Model
     public function guru(): BelongsTo
     {
         return $this->belongsTo(Guru::class);
+    }
+
+    public function jadwalPembelajaran(): BelongsTo
+    {
+        return $this->belongsTo(JadwalPembelajaran::class, 'jadwal_id');
     }
 }
